@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "B站总结",
+  "description": "AI-powered video content summarization tool for Bilibili",
+  "version": "1.0",
+  "icons": {
+    "16": "icons/icon16.jpg",
+    "48": "icons/icon48.jpg"
+    },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Bilibili AI Summary"
+  },
+  "options_page": "index.html",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.bilibili.com/*",
+    "https://api.openai.com/*",
+    "https://api.kksj.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.bilibili.com/video/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["https://www.bilibili.com/*"]
+    }
+  ]
+}
